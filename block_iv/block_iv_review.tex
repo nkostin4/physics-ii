@@ -1,0 +1,689 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{import}
+
+\usetheme{default}
+\usecolortheme{seahorse}
+\usefonttheme{serif}
+
+\input{../preamble}
+
+\title{PHGN 200 --- Electromagnetism and Optics}
+\subtitle{Block IV: Optics}
+
+\author{}
+\date{Block IV Review Slides}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Some Retrospective Thinking}
+
+Congratulations on making it this far in the course --- this material is by no means easy. We're in the home stretch now!
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/dabbing.png}
+\end{figure}
+
+Block IV is where everything comes together nicely, and the beauty of electromagnetism really shines. So let's start with a super quick review of what we know so far. (In the next few slides, pay attention to the boxed equations --- they're what's known as the \emph{Maxwell Equations}.)
+
+\end{frame}
+
+\begin{frame}{Electrostatics}
+
+The first block in this course concerned \emph{electrostatics} --- the study of stationary charges. We found that a stationary charge (or collection of charges) creates an electric field according to Coulomb's law:
+\begin{equation*}
+    \vec{E} = \int d\vec{E} = \int \frac{k\ dQ}{r^3}\ \vec{r}
+\end{equation*}
+
+We also learned about Gauss's law, which asserts that the net electric flux through a closed surface is proportional to the charge it encloses:
+\begin{equation*}
+    \boxed{\oint \vec{E} \cdot d\vec{A} = \frac{Q_{\text{enc}}}{\epsilon_o}}
+\end{equation*}
+
+And finally, we learned that electric fields can also be described with a scalar quantity known as the electric potential via
+\begin{equation*}
+    \vec{E} = -\nabla V = -\left( \frac{\partial V}{\partial x} \ihat + \frac{\partial V}{\partial y} \jhat + \frac{\partial V}{\partial z} \khat \right)
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Magnetostatics}
+
+Where stationary charges create electric fields, moving charges (that is, currents) create magnetic fields. For a steady current, the Biot-Savart law gives the magnetic field as
+\begin{equation*}
+    \vec{B} = \int d\vec{B} = \int \frac{\mu_o\ I\ d\vec{\ell} \times \vec{r}}{4\pi r^3}
+\end{equation*}
+
+\begin{center}
+    (Magneto{\emph{statics}} concerns the magnetic fields that arise from \emph{steady} currents.)
+\end{center}
+
+\vfill
+We also got Amp{\'e}re's law, which reads
+\begin{equation*}
+    \boxed{\oint \vec{B} \cdot d\vec{\ell} = \mu_o I_{\text{thru}}}
+\end{equation*}
+
+All of this gives rise to a nice parallel between electrostatics and magnetostatics:
+\begin{equation*}
+    \begin{cases} \text{Electrostatics:}& \qquad \text{Coulomb} \to \text{Gauss} \\ \text{Magnetostatics:}& \qquad \text{Biot-Savart} \to \text{Amp{\'e}re} \end{cases}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Electric and Magnetic Flux}
+
+Magnetic fields differ from electric fields in a very critical way. A lone charge sets up an electric field, so the electric flux through a closed surface is
+\begin{equation*}
+    \oint \vec{E} \cdot d\vec{A} = \frac{Q_{\text{enc}}}{\epsilon_o}
+\end{equation*}
+
+But there is no such thing as a ``magnetic charge'' that creates a magnetic field by itself. Thus, the magnetic flux through a closed surface is always zero:
+\begin{equation*}
+    \boxed{\oint \vec{B} \cdot d\vec{A} = 0}
+\end{equation*}
+
+There still can be a non-zero magnetic flux through an \emph{open} surface:
+\begin{equation*}
+    \Phi_B = \int \vec{B} \cdot d\vec{A}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Electromagnetic Induction}
+
+This brings us to electromagnetic induction: Whenever (and for whatever reason) the magnetic flux through a loop changes, an emf
+\begin{equation*}
+    \mathcal{E} = -\frac{d\Phi_B}{dt}
+\end{equation*}
+
+will appear in the loop. Faraday's law is also sometimes written in its integral form:
+\begin{equation*}
+    \boxed{\oint \left( \vec{E} + \vec{v} \times \vec{B} \right) \cdot d\vec{\ell} = -\frac{d\Phi_B}{dt}}
+    % \oint \vec{E} \cdot d\vec{\ell} = - \int \frac{\partial \vec{B}}{\partial t} \cdot d\vec{A} \quad \Longleftrightarrow \quad \oint \left( \vec{E} + \vec{v} \times \vec{B} \right) \cdot d\vec{\ell} = -\frac{d\Phi_B}{dt}
+\end{equation*}
+
+\vfill
+
+And because keeping track of the signs in Faraday's law is a headache, we got Lenz's law:
+\begin{center}
+    Nature abhors a change in flux.
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Electrodynamics Before Maxwell}
+
+So far, we have the following equations that govern electrodynamics:
+\begin{equation*}
+    \begin{cases} \displaystyle \oint \vec{E} \cdot d\vec{A} = \frac{Q_{\text{enc}}}{\epsilon_o} & \text{Gauss's law} \\[1.0em] \displaystyle \oint \vec{B} \cdot d\vec{A} = 0 & \text{} \\[1.0em] \displaystyle \oint \vec{E} \cdot d\vec{\ell} = - \int \frac{\partial \vec{B}}{\partial t} \cdot d\vec{A} & \text{Faraday's law} \\[1.0em] \displaystyle \oint \vec{B} \cdot d\vec{\ell} = \mu_o I_{\text{thru}} & \text{Amp{\'e}re's law} \end{cases}
+\end{equation*}
+
+This is exactly what Maxwell began with in the mid-nineteenth century when he began his work. But there was an issue.
+
+\end{frame}
+
+\begin{frame}{The Problem with Amp{\'e}re's Law}
+
+There's a problem with Amp{\'e}re's law as it stands:
+\begin{equation*}
+    \oint \vec{B} \cdot d\vec{\ell} = \mu_o I_{\text{thru}}
+\end{equation*}
+
+Suppose a capacitor is being charged, and Amp{\'e}re's law is to be applied to the Amp{\'e}rian loop shown below:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textheight]{figures/duracell_base.png}
+\end{figure}
+
+(The battery is sold separately.)
+
+\end{frame}
+
+\begin{frame}{The Problem with Amp{\'e}re's Law Reveals Itself}
+
+How do we determine $I_{\text{thru}}$? Well, $I_{\text{thru}}$ is the total current passing through the loop. More precisely, \emph{it is the current piercing a surface that has the loop for its boundary}.
+
+\vfill
+
+The simplest surface lies in the plane of the loop:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textheight]{figures/duracell_disk.png}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{The Problem with Amp{\'e}re's Law Reveals Itself}
+
+But we could just as correctly use a balloon-shaped surface:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textheight]{figures/duracell_balloon.png}
+\end{figure}
+
+No current passes through \emph{this} surface, and we conclude that $I_{\text{thru}} = 0$! (If this bothers you --- ``obviously one should use the plane surface'' --- remember that the Amperian loop could be some contorted shape that doesn't even lie in a plane)
+
+\end{frame}
+
+\begin{frame}{How Maxwell Fixed Amp{\'e}re's Law}
+
+Maxwell introduced the \emph{displacement current} term into Amp{\'e}re's law that fixes this issue:
+\begin{equation*}
+    \oint \vec{B} \cdot d\vec{\ell} = \mu_o I_{\text{thru}} + \mu_o \underbrace{\hspace{0.25em}\epsilon_o \frac{d\Phi_E}{dt}\hspace{0.25em}}_{I_{\text{disp}}}
+\end{equation*}
+
+It's a misleading name: displacement current has nothing to do with real current (other than sharing units).
+
+\vfill
+
+But Maxwell's correction to Amp{\'e}re's law introduces a certain aesthetic appeal: just as a changing \emph{magnetic} field induces an \emph{electric} field (Faraday's law), so
+\begin{center}
+    A changing electric field induces a magnetic field!
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Classical Electrodynamics}
+
+Altogether, the Maxwell equations are
+\begin{equation*}
+    \begin{rcases} \displaystyle \oint \vec{E} \cdot d\vec{A} = \frac{Q_{\text{enc}}}{\epsilon_o} & \text{Gauss's law} \\[0.1em] \displaystyle \oint \vec{B} \cdot d\vec{A} = 0 & \text{} \\[0.1em] \displaystyle \oint \vec{E} \cdot d\vec{\ell} = - \int \frac{\partial \vec{B}}{\partial t} \cdot d\vec{A} & \text{Faraday's law} \\[0.1em] \displaystyle \oint \vec{B} \cdot d\vec{\ell} = \mu_o I_{\text{thru}} + \mu_o \epsilon_o \frac{d\Phi_E}{dt} & \text{Amp{\'e}re's law} \end{rcases}
+\end{equation*}
+
+The Maxwell equations, together with the Lorentz force law,
+\begin{equation*}
+    \vec{F} = q \left( \vec{E} + \vec{v} \times \vec{B} \right),
+\end{equation*}
+
+form the entire theoretical content of classical electrodynamics! Literally everything we've done in this course has been working out the details of these equations :)
+
+\end{frame}
+
+\begin{frame}{A Primer on Waves}
+
+What is a wave? Here's one working definition: a wave is a disturbance of a continuous medium that propagates with fixed shape at constant velocity.
+
+\vfill
+
+Vague as that may be, it's enough to get us started. But how do we represent that mathematically?
+
+\vfill
+
+Let's turn to the wave equation:
+\begin{equation*}
+    \frac{\partial^2 g}{\partial z^2} = \frac{1}{v^2} \frac{\partial^2 g}{\partial t^2}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{The Wave Equation and Sinusoidal Waves}
+
+The wave equation looks kind of scary:
+\begin{equation*}
+    \frac{\partial^2 g}{\partial z^2} = \frac{1}{v^2} \frac{\partial^2 g}{\partial t^2}
+\end{equation*}
+
+And indeed, the wave equation admits all kinds of solutions. But all we really have to worry about is the sinusoidal wave:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1]
+    \draw[BLACK, ->] (-4,0) -- (4,0) node[BLACK, anchor=west] {$z$};
+    \draw[BLACK, ->] (0,-1.4) -- (0,1.4) node[BLACK, anchor=south] {$g$};
+    \draw[BLUE, thick] (-4,1) cos (-3,0);
+    \draw[BLUE, thick] (-3,0) sin (-2,-1);
+    \draw[BLUE, thick] (-2,-1) cos (-1,0);
+    \draw[BLUE, thick] (-1,0) sin (0,1);
+    \draw[BLUE, thick] (0,1) cos (1,0);
+    \draw[BLUE, thick] (1,0) sin (2,-1);
+    \draw[BLUE, thick] (2,-1) cos (3,0);
+    \draw[BLUE, thick] (3,0) sin (4,1);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Sinusoidal Waves and Some Terminology}
+
+The most general form of a sinusoidal wave is
+\begin{equation*}
+    g(z,t) = A \cos{\left[ k\left(z - vt \right) + \delta \right]}
+\end{equation*}
+
+Shown below is the plot of the wave above at $t=0$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+    \draw[BLACK, ->] (-4,0) -- (9,0) node[BLACK, anchor=west] {$z$};
+    \draw[BLACK, ->] (0,-1.4) -- (0,1.4) node[BLACK, anchor=south] {$g(z,0)$};
+    \draw[BLUE, thick] (-4.6,1) cos (-3.6,0);
+    \draw[BLUE, thick] (-3.6,0) sin (-2.6,-1);
+    \draw[BLUE, thick] (-2.6,-1) cos (-1.6,0);
+    \draw[BLUE, thick] (-1.6,0) sin (-0.6,1);
+    \draw[BLUE, thick] (-0.6,1) cos (0.6,0);
+    \draw[BLUE, thick] (0.6,0) sin (1.6,-1);
+    \draw[BLUE, thick] (1.6,-1) cos (2.6,0);
+    \draw[BLUE, thick] (2.6,0) sin (3.6,1);
+    \draw[BLUE, thick] (3.6,1) cos (4.6,0);
+    \draw[BLUE, thick] (4.6,0) sin (5.6,-1);
+    \draw[BLUE, thick] (5.6,-1) cos (6.6,0);
+    \draw[BLUE, thick] (6.6,0) sin (7.6,1);
+    %
+    \draw[BLACK, ->] (3.6,0) -- (3.6,1) node[BLACK, left, midway] {\tiny $A$};
+    \draw[BLACK] (3.2,1) -- (4.0,1);
+    %
+    \filldraw[BLACK] (-0.6,1) circle (0.1);
+    \node[BLACK, above] at (-3,2) {\parbox[c]{0.2\textwidth}{\begin{center} \tiny Central \\ maximum \end{center}}};
+    \draw[BLACK, thick, <-] (-0.7,1.1) -- (-3,2);
+    %
+    \draw[BLACK, dashed] (-0.6,1) -- (-0.6,0);
+	\draw[BLACK, thick, decoration={brace, mirror, raise=5pt}, decorate] (-0.6,0) -- (0,0) node[black, midway, below=6pt] {\tiny $\delta/k$};
+	%
+	\draw[BLACK, ->] (5,2) -- (6.6,2) node[BLACK, midway, above] {$v$};
+	%
+	\draw[BLACK] (1.6,-1) -- (1.6,-1.5);
+	\draw[BLACK] (5.6,-1) -- (5.6,-1.5);
+	\draw[BLACK, <->] (1.6,-1.25) -- (5.6,-1.25) node[BLACK, midway, below] {\tiny $\lambda$};
+\end{tikzpicture}
+\end{figure}
+
+$A$ is the \emph{amplitude} of the wave, the argument of the cosine is called the \emph{phase}, and $\delta$ is the \emph{phase constant}. Finally, $k$ is the \emph{wave number}; it is related to the wavelength via
+\begin{equation*}
+	\lambda = 2\pi / k
+\end{equation*}
+
+for when $z$ advances by $2\pi/k$, the cosine does one complete cycle.
+
+\end{frame}
+
+\begin{frame}{Sinusoidal Waves and Some More Terminology}
+
+As time passes, the entire wave proceeds to the right, at speed $v$. At any fixed point $z$, the string vibrates up and down, undergoing one full cycle in a period:
+\begin{equation*}
+	T = \frac{2\pi}{kv}
+\end{equation*}
+
+The frequency $f$ (number of oscillations per unit time) is
+\begin{equation*}
+	f = \frac{1}{T} = \frac{kv}{2\pi} = \frac{v}{\lambda}
+\end{equation*}
+
+For our purposes, a more convenient unit is the \emph{angular frequency} $\omega$:
+\begin{equation*}
+	\omega = 2\pi f = kv
+\end{equation*}
+
+Ordinarily, it's nicer to write sinusoidal waves in terms of $\omega$, rather than $v$:
+\begin{equation*}
+	g(z,t) = A \cos{\left( kz - \omega t + \delta \right)}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Maxwell's Equations in a Vacuum}
+
+In a vacuum, there cannot be any charge or current, so Maxwell's equations simplify to
+\begin{equation*}
+    \begin{cases} \displaystyle \oint \vec{E} \cdot d\vec{A} = 0 \quad \implies \quad \nabla \cdot \vec{E} = 0 \\[1.0em] \displaystyle \oint \vec{B} \cdot d\vec{A} = 0 \quad \implies \quad \nabla \cdot \vec{B} = 0 \\[1.0em] \displaystyle \oint \vec{E} \cdot d\vec{\ell} = - \int \frac{\partial \vec{B}}{\partial t} \cdot d\vec{A} \quad \implies \quad \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} \\[1.0em] \displaystyle \oint \vec{B} \cdot d\vec{\ell} = \mu_o \epsilon_o \int \frac{\partial \vec{E}}{\partial t} \cdot d\vec{A} \quad \implies \quad \nabla \times \vec{B} = \mu_o \epsilon_o \frac{\partial \vec{E}}{\partial t} \end{cases}
+\end{equation*}
+
+(The equations on the right are known as the Maxwell equations in differential form --- they are completely equivalent to their integral counterparts).
+
+\end{frame}
+
+\begin{frame}{The Wave Nature of Light}
+
+A little bit of math on the previous equations gets us
+\begin{equation*}
+	\nabla^2 \vec{E} = \mu_o \epsilon_o \frac{\partial^2 \vec{E}}{\partial t^2}, \qquad \nabla^2 \vec{B} = \mu_o \epsilon_o \frac{\partial^2 \vec{B}}{\partial t^2}
+\end{equation*}
+
+Look at that! That takes the same form as the wave equation in 3D:
+\begin{equation*}
+	\nabla^2 g = \frac{1}{v^2} \frac{\partial^2 g}{\partial t^2}
+\end{equation*}
+
+This tells us that in a vacuum, light propagates as a wave, with speed
+\begin{equation*}
+	v = \frac{1}{\sqrt{\epsilon_o \mu_o}} = c = \SI{3.00e8}{\metre/\second}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Monochromatic Plane Waves}
+
+Again we'll confine our attention to sinusoidal waves of frequency $\omega$. Since different frequencies in the visible range correspond to different colors, such waves are called \emph{monochromatic}.
+
+\begin{columns}
+
+\column{0.60\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.50\textheight]{figures/plane_wave.png}
+\end{figure}
+
+\column{0.4\textwidth}
+Suppose, moreover, that the waves are traveling in the $z$ direction and have no $x$ or $y$ dependence; these are called \emph{plane waves}, because the fields are uniform over every plane perpendicular to the direction of propagation.
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Electromagnetic Waves are Transverse}
+
+Electromagnetic waves are \emph{transverse}: the electric and magnetic fields are perpendicular to the direction of propagation.
+
+\vfill
+
+Moreover, $\vec{E}$ and $\vec{B}$ are \emph{in phase and mutually perpendicular}; their amplitudes are related by
+\begin{equation*}
+    B_o = \frac{k}{\omega} E_o = \frac{1}{c} E_o
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Electromagnetic Waves Visualized}
+
+Take the following wave, for example. It is propagating in the positive $z$ direction, with $\vec{E}$ pointing in the $x$ direction, and $\vec{B}$ pointing in the $y$ direction.
+
+\vspace{-0.4em}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/em_wave.png}
+\end{figure}
+
+\vspace{-1.6em}
+
+The electric and magnetic fields are given by
+\begin{gather*}
+    \vec{E} (z, t) = E_o \cos{\left( kz - \omega t + \delta \right)} \ihat, \\
+    \vec{B} (z, t) = \frac{1}{c} E_o \cos{\left( kz - \omega t + \delta \right)} \jhat
+\end{gather*}
+
+\end{frame}
+
+\begin{frame}{Energy in Electromagnetic Fields}
+
+When studying electrostatics, we determined that the work necessary to assemble a static charge distribution (against the Coulomb repulsion of like charges) is
+\begin{equation*}
+    W_e = \frac{\epsilon_o}{2} \int E^2 dV
+\end{equation*}
+
+where $\vec{E}$ is the resulting electric field. Likewise, the work required to get currents going (against the back emf) is
+\begin{equation*}
+    W_m = \frac{1}{2\mu_o} \int B^2 dV
+\end{equation*}
+
+where $\vec{B}$ is the resulting magnetic field. This suggests that the total energy stored in electromagnetic fields, per unit volume, is
+\begin{equation*}
+    u = \underbrace{\hspace{0.5em}\frac{1}{2}\epsilon_o E^2\hspace{0.5em}}_{u_e} + \underbrace{\hspace{0.5em}\frac{1}{2\mu_o} B^2\hspace{0.5em}}_{u_m} = \frac{1}{2} \left( \epsilon_o E^2 + \frac{1}{\mu_o} B^2 \right)
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{The Poynting Vector}
+
+The \emph{energy per unit time, per unit area,} transported by electromagnetic fields is called the Poynting vector:
+\begin{equation*}
+    S \equiv \frac{1}{\mu_o} \left( \vec{E} \times \vec{B} \right)
+\end{equation*}
+
+Specifically, $\vec{S} \cdot d\vec{A}$ is the energy per unit time crossing the infinitesimal surface $d\vec{A}$ --- the energy \emph{flux} (so $\vec{S}$ is the \emph{energy flux density}).
+
+\end{frame}
+
+\begin{frame}{Concerning Energy and Momentum in Electromagnetic Waves --- What's Coming Up}
+
+The next 5 slides are a derivation of frequently used equations that concern energy and momentum in electromagnetic waves.
+
+\vfill
+
+The derivations are a little math-heavy, but are nonetheless insightful.
+
+\end{frame}
+
+\begin{frame}{Energy \& Momentum in Electromagnetic Waves (Part 1)}
+
+Suppose we have a monochomatic plane wave propagating in the positive $z$ direction (such as the one shown a few slides back). It's electric and magnetic fields are described by
+\begin{gather*}
+    \vec{E} (z, t) = E_o \cos{\left( kz - \omega t + \delta \right)} \ihat, \\
+    \vec{B} (z, t) = \frac{1}{c} E_o \cos{\left( kz - \omega t + \delta \right)} \jhat
+\end{gather*}
+
+Since $E = cB$, the energy per unit volume is
+\begin{gather*}
+    u = \frac{1}{2} \left( \epsilon_o E^2 + \frac{1}{\mu_o} B^2 \right) = \frac{1}{2} \left( \epsilon_o E^2 \frac{1}{\cancel{\mu_o}} \cancel{\mu_o} \epsilon_o E^2 \right) \\
+    \implies u = \epsilon_o E^2 = \epsilon_o E_o^2 \cos^2{\left( kz - \omega t + \delta \right)}
+\end{gather*}
+
+\end{frame}
+
+\begin{frame}{Energy \& Momentum in Electromagnetic Waves (Part 2)}
+
+Now let's calculate the Poynting vector for the same monochromatic plane wave:
+\begin{gather*}
+    \vec{S} = \frac{1}{\mu_o} \left( \vec{E} \times \vec{B} \right) = \frac{1}{\mu_o} \frac{E_o^2}{c} \cos^2{\left( kz - \omega t + \delta \right)} \khat \\
+    \implies \vec{S} = c \underbrace{\epsilon_o E_o^2 \cos^2{\left( kz - \omega t + \delta \right)}}_{u} \khat
+\end{gather*}
+
+Notice that $\vec{S}$ is the energy density ($u$) times the velocity of the waves ($c \khat$) --- as it should be. After all, in a time $\Delta t$, a length $c\ \Delta t$ passes through an area $A$, carrying with it an energy $u A c\ \Delta t$. The energy per unit time, per unit area, transported by the wave is therefore $uc$.
+
+\vfill
+
+(To compute the cross-product, note that $\vec{E}$ and $\vec{B}$ are perpendicular, so $\ihat \times \jhat = \khat$. Also, observe that $\frac{1}{\mu_o c} = c \epsilon_o$.)
+
+\end{frame}
+
+\begin{frame}{Energy \& Momentum in Electromagnetic Waves (Part 3)}
+
+So far, we have that for a monochromatic plane wave, the Poynting vector is $\vec{S} = c \epsilon_o E_o^2 \cos^2{\left( kz - \omega t + \delta \right)}\ \khat$. But in the case of light, the wavelength is so short and the period is so brief that any measurement will encompass many cycles. Typically, therefore, we want the average value. The average of cosine-squared over a complete cycle is
+\begin{equation*}
+    \frac{1}{T} \int_0^T \cos^2{\left( kz - \frac{2\pi t}{T} + \delta \right)}\ dt = \frac{1}{2}
+\end{equation*}
+
+So we have
+\begin{equation*}
+    \langle \vec{S} \rangle = \frac{1}{2} c \epsilon_o E_o^2\ \khat
+\end{equation*}
+
+Where the brackets, $\langle\ \rangle$, denote the time average over a complete cycle. The average power per unit area transported by an electromagnetic wave is called the \emph{intensity}:
+\begin{equation*}
+    I \equiv \langle S \rangle = \frac{1}{2} c \epsilon_o E_o^2 = \frac{P_{\text{avg}}}{A}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Energy \& Momentum in Electromagnetic Waves (Part 4)}
+
+Electromagnetic fields not only carry energy, they also carry momentum. The momentum density (analogous to the energy density) stored in the field is
+\begin{equation*}
+    \vec{g} = \frac{1}{c^2} \vec{S}
+\end{equation*}
+
+For monochomatic plane waves, then,
+\begin{equation*}
+    \vec{g} = \frac{1}{c} \epsilon_o E_o^2 \cos^2{\left( kz - \omega t + \delta \right)}\ \khat = \frac{1}{c} u\ \khat
+\end{equation*}
+
+As before, the average value over a complete cycle is
+\begin{equation*}
+    \langle \vec{g} \rangle = \frac{1}{2c} \epsilon_o E_o^2\ \khat
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Energy \& Momentum in Electromagnetic Waves (Part 5)}
+
+When light falls (at normal incidence) on a perfect absorber, it delivers its momentum to the surface. In a time $\Delta t$, the momentum transfer is $\Delta \vec{p} = \langle \vec{g} \rangle A c\ \Delta t$, so the \emph{radiation pressure} (average force per unit area) is
+\begin{equation*}
+    \mathscr{P} = \frac{1}{A} \frac{\Delta p}{\Delta t} = \frac{1}{2} \epsilon_o E_o^2 = \frac{I}{c}
+\end{equation*}
+
+On a perfect reflector, the pressure is twice as great.
+
+\end{frame}
+
+\begin{frame}{Energy and Momentum in Electromagnetic Waves Summarized}
+
+
+We're done with the derivations! Here's a quick summary of what we've learned.
+
+\vfill
+
+Electromagnetic waves carry both energy and momentum.
+
+\vfill
+
+The intensity of an electromagnetic wave (average power per unit area) is:
+\begin{equation*}
+    I = \frac{1}{2} c \epsilon_o E_o^2 = \frac{P_{\text{avg}}}{A}
+\end{equation*}
+
+Remember! Often we deal with light sources that propagate outwards (into a sphere, for instance). We would take the area to be $4\pi r^2$ for a sphere, $2\pi r^2$ for a hemisphere, etc.
+
+\end{frame}
+
+\begin{frame}{Energy and Momentum in Electromagnetic Waves Summarized}
+
+For a perfect absorber, the radiation pressure (average force per unit area) is:
+\begin{equation*}
+    \mathscr{P} = \frac{1}{A} \frac{\Delta p}{\Delta t} = \frac{1}{2} \epsilon_o E_o^2 = \frac{I}{c}
+\end{equation*}
+
+And for a perfect reflector, the radiation pressure is $\frac{2I}{c}$ --- twice as great.
+
+\vfill
+
+Wow that's a bunch of p's. Here's how I recommend not getting confused:
+\begin{equation*}
+    \begin{cases} \text{Momentum} \ \to \ p \text{ (lowercase)} \\ \text{Power} \ \to \ P \text{ (uppercase)} \\ \text{Radiation pressure} \ \to \ \mathscr{P} \text{ (or some special p)} \end{cases}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Geometric Optics --- Reflection}
+
+Light coming into a surface bounces off (reflects) the surface at the same angle (defined relative to the normal) that it came in at:
+
+\begin{equation*}
+    \theta_{\text{incident}} = \theta_{\text{reflect}}
+\end{equation*}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    \draw[BLACK, thick] (-4,0) -- (4,0);
+    \draw[BLACK, dashed] (0,-1) -- (0,2);
+    \draw[RED, ultra thick] (-3,1.5) -- (0,0) -- (3,1.5);
+    \draw[BLACK, <->] (0,1.1) arc (90:150:1.1) node[BLACK, midway, anchor=south] {$\theta_{\text{inc}}$};
+    \draw[BLACK, <->] (0,1) arc (90:30:1) node[BLACK, midway, anchor=south] {$\theta_{\text{refl}}$};
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Geometric Optics --- Refraction}
+
+Light going from one material to another, it bends (refracts) according to Snell's law:
+
+\begin{equation*}
+    n_1 \sin{\theta_1} = n_2 \sin{\theta_2}
+\end{equation*}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.6]
+    \draw[BLACK, thick] (-4,0) -- (4,0);
+    \draw[BLACK, dashed] (0,-2) -- (0,2);
+    \draw[RED, ultra thick] (-3,-3) -- (0,0) -- (3,1.5);
+    \draw[BLACK, <->] (0,-1) arc (270:225:1) node[BLACK, midway, anchor=north] {$\theta_1$};
+    \draw[BLACK, <->] (0,1) arc (90:30:1) node[BLACK, midway, anchor=south west] {$\theta_2$};
+    \node[BLACK] at (-3,-1) {$n_1$};
+    \node[BLACK] at (-3,1) {$n_2$};
+\end{tikzpicture}
+\end{figure}
+
+The \emph{index of refraction} is a property of the material:
+\begin{equation*}
+    n = \frac{c}{v} > 1
+\end{equation*}
+
+For a vacuum, the index of refraction is defined to be 1. In a material, the index of refraction is greater than 1.
+
+\end{frame}
+
+\begin{frame}{Geometric Optics --- Total Internal Reflection}
+
+Suppose at refraction angle $\theta_2$ is \ang{90}. Then the light is completely confined to the first material: it undergoes \emph{total internal reflection}!
+
+\vspace{-2em}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.4]
+    \draw[BLACK, thick] (-4,0) -- (4,0);
+    \draw[BLACK, dashed] (0,-2) -- (0,2);
+    \draw[RED, ultra thick] (-3,-3) -- (0,0) -- (3,0);
+    \draw[BLACK, <->] (0,-1) arc (270:225:1) node[BLACK, midway, anchor=north] {$\theta_1$};
+    \draw[BLACK, <->] (0,1) arc (90:0:1) node[BLACK, midway, anchor=south west] {$\theta_2$};
+    \node[BLACK] at (-3,-1) {$n_1$};
+    \node[BLACK] at (-3,1) {$n_2$};
+\end{tikzpicture}
+\end{figure}
+
+\vspace{-1em}
+
+Then $\theta_1$, the incident angle, is known as the \emph{critical angle}. This critical angle is
+\begin{equation*}
+    n_1 \sin{\theta_1} = n_2 \cancelto{1}{\sin{90}} \quad \implies \quad \theta_1 = \theta_c = \sin^{-1}{\left( \frac{n_2}{n_1} \right)}
+\end{equation*}
+
+Note that the inverse sine function $\sin^{-1}{x}$ is not defined for $x > 1$. Then it follows that $n_1 > n_2$. That is, in order for TIR to occur, the light must be within a medium with a higher index of refraction than its surroundings.
+
+\end{frame}
+
+\begin{frame}{Physical Optics}
+
+The key idea of physical optics is to consider the wave-like nature of light.
+
+\vfill
+
+Constructive interference occurs when the path length difference is an integer multiple of the wavelength:
+\begin{equation*}
+    \Delta r = r_2 - r_1 = m \lambda
+\end{equation*}
+
+Destructive interference occurs when the path length difference is a half-integer multiple of the wavelength:
+\begin{equation*}
+    \Delta r = r_2 - r_1 = \left( m + \frac{1}{2} \right) \lambda
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Physical Optics --- Bragg Diffraction}
+
+The governing equation for Bragg Diffraction is
+\begin{equation*}
+    d\sin{\theta_{\text{inc}}} + d\sin{\theta_{\text{ref}}} = m \lambda
+\end{equation*}
+
+Or, if the incident angle is the same as the reflected angle,
+\begin{equation*}
+    2d\sin{\theta} = m \lambda
+\end{equation*}
+
+This is nothing more than a constructive interference condition.
+
+\end{frame}
+
+\end{document}
